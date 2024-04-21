@@ -21,6 +21,19 @@ Route::get('/', function () {
 
 
 Route::get('/send-mail', function () {
+
+    // Record the start time
+    $startTime = microtime(true);
+
+    // Send the email
     Mail::to('hasbullah.work@gmail.com')->send(new TestMail());
-    return 'Test email sent!';
+
+    // Calculate the elapsed time
+    $endTime = microtime(true);
+    $elapsedTimeSeconds = $endTime - $startTime;
+
+    // Format the elapsed time to remove decimal points
+    $elapsedTimeSecondsFormatted = number_format($elapsedTimeSeconds, 0);
+
+    return 'Test email sent! Email delivery time: ' . $elapsedTimeSecondsFormatted . ' seconds';
 });
